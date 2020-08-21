@@ -6,11 +6,6 @@ reg clk;
 reg rst_n;
 wire [1:0] check_status;
 
-parameter INVALID = 2'b00;
-parameter RUNNING = 2'b01;
-parameter PASSED = 2'b10;
-parameter FAILED = 2'b11;
-
 initial begin
     $dumpfile("wave.vcd");
     $dumpvars(0, Test);
@@ -88,53 +83,6 @@ crc32_32 uut(
 
 
 endmodule
-// module Test();
-//     reg clk;
-//     reg rst_n;
-//     reg data_in_valid;
-//     reg [31:0] data_in;
-//     wire [31:0] next_crc32;
-
-//     reg [31:0] data [0:7];
-
-//     integer i;
-
-//     initial begin
-//         $readmemh("data.txt", data);
-//         for(i=0; i<=7; i=i+1) begin
-//             $display("data[%1d] = 0x%08x", i, data[i]);
-//         end
-//         $dumpfile("wave.vcd");
-//         $dumpvars(0, Test);
-//         clk = 0;
-//         forever begin
-//             #5 clk = ~clk;
-//         end
-//     end
-
-//     initial begin
-//         rst_n = 1'b0;
-//         data_in_valid = 1'b0;
-//         #20;
-//         rst_n = 1'b1;
-//         for(i=0; i<=7; i=i+1) begin
-//             data_in = data[i];
-//             data_in_valid = 1'b1;
-//             #5 $display("next_crc32 = 0x%08x", next_crc32);
-//             #5;
-//         end
-//         data_in_valid = 1'b0;
-//         #10 $finish;
-//     end
-
-//     crc32_32 uut(
-//         .clk(clk),
-//         .rst_n(rst_n),
-//         .data_in_valid(data_in_valid),
-//         .data_in(data_in),
-//         .next_crc32(next_crc32)
-//     );
-// endmodule
 
 module crc32_32 (
     input wire clk,
